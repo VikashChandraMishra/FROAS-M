@@ -1,0 +1,63 @@
+{% extends 'sidebar.html' %}
+
+{% block title %} Class {% endblock %}
+
+{% block content %}
+
+<div class="col-9">
+    <div class="container d-flex border my-3">
+
+        <div class="container bg-transparent w-75" id="editing-form">
+
+            <h2><strong>ENTER CLASS DETAILS</strong></h2>
+
+            <form id="post-form" action="{% url 'tau:create' id %}" name="form" method="POST" onsubmit="return validate()">
+                {% csrf_token %}
+
+                <div>
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" class="form-control data-input" id="subject" name="subject" />
+                </div>
+
+                <div>
+                    <label for="course" class="form-label">Course</label>
+                    <input type="text" class="form-control data-input" id="course" name="course" />
+                </div>
+
+                <div>
+                    <label for="semester" class="form-label">Semester</label>
+                    <input type="text" class="form-control data-input" id="semester" name="semester" />
+                </div>
+
+                <button type="submit" class="btn btn-success my-4 mx-2 py-1" id="update_button"
+                    name="update_button">Create Class</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+    function validate() {
+        subject = document.getElementById('subject').value;
+        course = document.getElementById('course').value;
+        semester = document.getElementById('semester').value;
+
+        if (
+            subject.length == 0 &&
+            course.length == 0 &&
+            semester.length == 0
+        ) {
+            alert("You cannot create a class without submitting the necessary details!");
+            return false;
+        }
+    }
+
+</script>
+
+{% endblock %}

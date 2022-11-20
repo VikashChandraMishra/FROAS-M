@@ -1,0 +1,28 @@
+#sidebar {
+    background-color: #212422;
+    height: 960px;
+}
+
+#sidebar h3 {
+    color: white;
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.option:hover {
+    color: violet;
+}
+
+.option {
+    width: 170px;
+    margin: auto;
+}
+
+.option:hover {
+    border-radius: 10px;
+    background-color: #66736a;
+}

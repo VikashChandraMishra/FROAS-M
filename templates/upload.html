@@ -1,0 +1,61 @@
+{% extends 'sidebar.html' %}
+
+{% block title %} Upload {% endblock %}
+
+{% block content %}
+
+
+<div class="col-9">
+    <div class="conatainer border my-3">
+
+        <div class="container w-75">
+
+            <h2>Upload samples here</h2>
+
+            <form action="{% url 'tau:upload' id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div>
+                    <label for="student_id" class="form-label">Student_ID</label>
+                    <input type="number" class="form-control data-input" id="student_id" name="student_id" required>
+                </div>
+
+
+                <div>
+                    <label for="files" class="form-label">Sample Photos</label>
+                    <input type="file" class="form-control data-input" id="files" name="files" required multiple>
+                </div>
+
+
+                <button type="submit" class="btn btn-success my-4 mx-2 py-1" id="upload_samples"
+                    name="upload_samples">Upload Samples</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{{success|json_script:"success"}}
+{{message|json_script:"message"}}
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+    const success = JSON.parse(document.getElementById('success').textContent);
+    const message = JSON.parse(document.getElementById('message').textContent);
+
+    console.log(success)
+    console.log(message)
+
+    if (success === false && message === 'already signed-out') {
+        alert('You have already signed out!')
+    }
+
+</script>
+
+{% endblock %}

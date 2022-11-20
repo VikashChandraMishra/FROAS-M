@@ -1,0 +1,36 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="col-9" id="profile-content">
+
+    <div class="row data-row mx-1 my-2">
+
+        <span>Institution: <strong>{{college}}</strong></span>
+        <br>
+        <span>Department: <strong>{{department}}</strong></span>
+
+    </div>
+    
+    <br>
+
+    <div class="row data-row mx-1 my-2">
+        <div class="col-6">
+            <p>First Name: <strong>{{firstname}}</strong></p>
+            <p>Last Name: <strong>{{lastname}}</strong></p>
+            <p>Email: <strong>{{email}}</strong></p>
+        </div>
+
+        <div class="col-6">
+            <p>Subject 1: <strong>{{subject1}}</strong></p>
+            <p>Subject 2: <strong>{{subject2}}</strong></p>
+            <p>Subject 3: <strong>{{subject3}}</strong></p>
+            <p>Subject 4: <strong>{{subject4}}</strong></p>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

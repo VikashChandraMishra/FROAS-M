@@ -1,0 +1,59 @@
+{% extends 'basic.html' %}
+
+{% block title %} SignIn - FROAS {% endblock %}
+
+{% block body %}
+
+<div>
+    <div class="container d-flex w-50 border my-3">
+
+        <div class="container bg-transparent w-100" id="signup-form">
+
+            <h2><strong>Sign In</strong></h2>
+
+            <form id="post-form" action="{% url 'users:signin' %}" method="POST" onsubmit="return validate()">
+                {% csrf_token %}
+
+                <div>
+                    <label for="id" class="form-label">User ID</label>
+                    <input type="text" class="form-control data-input" id="id" name="id" required />
+                </div>
+
+                <div>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control data-input" id="password" name="password" required />
+                </div>
+
+                <div id="error"></div>
+
+                <button type="submit" class="btn btn-success my-4 mx-2 py-1" id="signin_button"
+                    name="signin_button">Sign In</button>
+
+            </form>
+        </div>
+    </div>
+
+
+
+    {{success|json_script:"success"}}
+    {{message|json_script:"message"}}
+
+
+</div>
+
+<script>
+    const success = JSON.parse(document.getElementById('success').textContent);
+    const message = JSON.parse(document.getElementById('message').textContent);
+
+    console.log(success)
+    console.log(message)
+
+    if(success == false && message === 'invalid credentials') {
+        error = document.getElementById('error');
+        error.innerHTML = 'Login with proper credentials!';
+        error.style.color = 'red';
+    }
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+
+{% block title %} List {% endblock %}
+
+{% block content %}
+
+<div class="col-9">
+
+    <div class="container-fluid border my-3">
+
+        <table id="student_list">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">ROLL</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">EMAIL</th>
+                    <th scope="col">COURSE</th>
+                    <th scope="col">SEMESTER</th>
+                    <th scope="col">DEPT. ID</th>
+                    <th scope="col">COLLEGE</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        let table = $('#student_list').DataTable({
+            "ajax": {
+                "processing": true,
+                "url": "{% url 'tau:list_data' id %}",
+                "dataSrc": "",
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "roll" },
+                { "data": "firstname" },
+                { "data": "lastname" },
+                { "data": "email" },
+                { "data": "course" },
+                { "data": "semester" },
+                { "data": "department" },
+                { "data": "college" },
+            ],
+        });
+    });
+
+</script>
+{% endblock %}

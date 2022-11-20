@@ -1,0 +1,131 @@
+{% extends 'sidebar.html' %}
+
+{% block title %} Edit {% endblock %}
+
+{% block content %}
+
+<div class="col-9">
+    <div class="container d-flex border my-3">
+
+        <div class="container bg-transparent w-75" id="editing-form">
+
+            <h2><strong>Edit Profile</strong></h2>
+
+            <form id="post-form" action="{% url 'users:edit_profile' id %}" method="POST" onsubmit="return validate()">
+                {% csrf_token %}
+
+                <div>
+                    <label for="firstname" class="form-label">First Name</label>
+                    <input type="text" class="form-control data-input" id="firstname" name="firstname" />
+                </div>
+
+                <div>
+                    <label for="lastname" class="form-label">Last Name</label>
+                    <input type="text" class="form-control data-input" id="lastname" name="lastname" />
+                </div>
+
+
+                <div>
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control data-input" id="email" name="email" />
+                </div>
+
+                <div>
+                    <label for="subject1" class="form-label">Subject 1</label>
+                    <input type="text" class="form-control data-input" id="subject1" name="subject1" />
+                </div>
+
+                <div>
+                    <label for="subject2" class="form-label">Subject 2</label>
+                    <input type="text" class="form-control data-input" id="subject2" name="subject2" />
+                </div>
+
+                <div>
+                    <label for="subject3" class="form-label">Subject 3</label>
+                    <input type="text" class="form-control data-input" id="subject3" name="subject3" />
+                </div>
+
+                <div>
+                    <label for="subject4" class="form-label">Subject 4</label>
+                    <input type="text" class="form-control data-input" id="subject4" name="subject4" />
+                </div>
+
+                <div>
+                    <label for="department" class="form-label">Department</label>
+                    <input type="text" class="form-control data-input" id="department" name="department" />
+                </div>
+
+                <div>
+                    <label for="college" class="form-label">College</label>
+                    <input type="text" class="form-control data-input" id="college" name="college" />
+                </div>
+
+                <div>
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control data-input" id="password" name="password" />
+                </div>
+
+
+                <div>
+                    <label for="cpassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control data-input" id="cpassword" name="cpassword" />
+                </div>
+
+                <button type="submit" class="btn btn-success my-4 mx-2 py-1" id="update_button"
+                    name="update_button">Save Changes</button>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+    function validate() {
+        firstname = document.getElementById('firstname').value;
+        lastname = document.getElementById('lastname').value;
+        email = document.getElementById('email').value;
+        subject1 = document.getElementById('subject1').value;
+        subject2 = document.getElementById('subject2').value;
+        subject3 = document.getElementById('subject3').value;
+        subject4 = document.getElementById('subject4').value;
+        department = document.getElementById('department').value;
+        college = document.getElementById('college').value;
+        password = document.getElementById('password').value;
+        cpassword = document.getElementById('cpassword').value;
+
+
+        if (
+            firstname.length == 0 &&
+            lastname.length == 0 &&
+            email.length == 0 &&
+            subject1.length == 0 &&
+            subject2.length == 0 &&
+            subject3.length == 0 &&
+            subject4.length == 0 &&
+            department.length == 0 &&
+            college.length == 0 &&
+            password.length == 0 &&
+            cpassword.length == 0) {
+            alert("You cannot submit a form with all fields empty!");
+            return false;
+        }
+
+
+        if (password === cpassword) {
+            return true;
+        }
+        else {
+            alert("Password and confirm password fields should match!")
+            return false;
+        }
+    }
+
+</script>
+
+{% endblock %}
