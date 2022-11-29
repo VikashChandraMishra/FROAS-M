@@ -7,7 +7,7 @@ from .models import Student, Class
 
 def train():
 
-    DIR = r'E:\Python\django Projects\Minor Project\FROAS-2\FROAS\tau\samples'
+    DIR = r'E:\Python\django Projects\Minor Project\FROAS-2\FROAS\samples'
     students = os.listdir(DIR)
     haar_cascade = cv.CascadeClassifier(r'E:\Python\django Projects\Minor Project\FROAS-2\FROAS\tau\haar_face.xml')
 
@@ -118,7 +118,7 @@ def record_attendance(id):
     
     for label in labels:
         student = students[label]
-        attendance = attendance + ',' + str(student['id'])
+        attendance = attendance + str(student['id']) + ',' 
         
     try:
         c = Class.objects.get(id=id)

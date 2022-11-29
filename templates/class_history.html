@@ -1,0 +1,57 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+
+{% block title %} Class History {% endblock %}
+
+{% block content %}
+
+<div class="col-9">
+
+    <div class="container-fluid border my-3">
+
+        <table id="student_list">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">COURSE</th>
+                    <th scope="col">SEMESTER</th>
+                    <th scope="col">SUBJECT</th>
+                    <th scope="col">DATE</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+
+    $(document).ready(function () {
+        let table = $('#student_list').DataTable({
+            "ajax": {
+                "processing": true,
+                "url": "{% url 'tau:list_classes' id %}",
+                "dataSrc": "",
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "course" },
+                { "data": "semester" },
+                { "data": "subject" },
+                { "data": "date" },
+            ],
+        });
+
+    });
+
+
+</script>
+{% endblock %}

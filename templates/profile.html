@@ -31,6 +31,37 @@
         </div>
     </div>
 
+    
+    <div class="row data-row mx-1 my-2">
+        <form id="post-form" action="{% url 'tau:display' id %}" method="POST" onsubmit="return validate()">
+            {% csrf_token %}
+
+            <div>
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" class="form-control data-input" id="subject" name="subject" required/>
+            </div>
+
+            <div>
+                <label for="course" class="form-label">Course</label>
+                <input type="text" class="form-control data-input" id="course" name="course" required/>
+            </div>
+
+            <div>
+                <label for="semester" class="form-label">Semester</label>
+                <input type="number" class="form-control data-input" id="semester" name="semester" required/>
+            </div>
+
+            <div>
+                <label for="start_date" class="form-label">Attendance From:</label>
+                <input type="date" class="form-control data-input" id="start_date" name="start_date" required/>
+            </div>
+
+            <button type="submit" class="btn btn-success my-4 mx-2 py-1" id="display_button"
+                name="display_button">Display Attendance</button>
+
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

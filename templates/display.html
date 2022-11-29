@@ -1,0 +1,63 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+
+{% block title %} Class History {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid border col-9">
+
+    <div class="container-fluid">
+        <h2>CLASS DETAILS</h2>
+        <h4>SUBJECT: {{class_details.subject}}</h4>
+        <h4>COURSE: {{class_details.course}}</h4>
+        <h4>SEMESTER: {{class_details.semester}}</h4>
+        <h4>CLASSES ATTENDED AFTER: {{class_details.start_date}}</h4>
+    </div>
+
+    <div class="container-fluid border my-3">
+        <table id="student_list">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">ROLL NUMBER</th>
+                    <th scope="col">FIRST NAME</th>
+                    <th scope="col">LAST NAME</th>
+                    <th scope="col">CLASSES ATTENDED</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for a in attendance %}
+                <tr>
+                    <td>
+                        {{ a.id }}
+                    </td>
+                    <td>
+                        {{ a.roll }}
+                    </td>
+                    <td>
+                        {{ a.firstname }}
+                    </td>
+                    <td>
+                        {{ a.lastname }}
+                    </td>
+                    <td>
+                        {{ a.classes_attended }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+</script>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'sidebar.html' %}
+{% load static %}
+
+
+{% block title %} Class Details {% endblock %}
+
+{% block content %}
+
+<div class="col-9">
+
+    <!-- {{course}} -->
+    <div class="container-fluid border my-3">
+
+        <table id="student_list">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">COURSE</th>
+                    <th scope="col">SEMESTER</th>
+                    <th scope="col">SUBJECT</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+    $(document).ready(function () {
+        let table = $('#student_list').DataTable({
+            "ajax": {
+                "processing": true,
+                "url": "{% url 'tau:list_classes' id %}",
+                "dataSrc": "",
+            },
+            "columns": [
+                {
+                    "data": "id",
+                    "render": function (data, type, row, meta) {
+                        let id = row.id  
+                        let a = "<a href='{% url 'tau:class_details' id %}' style='color:blue;'>" + id + '</a>';
+                        return a;
+                    }
+                },
+                { "data": "course" },
+                { "data": "semester" },
+                { "data": "subject" },
+            ],
+        });
+
+    });
+
+
+</script>
+{% endblock %}
