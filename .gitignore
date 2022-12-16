@@ -2,3 +2,6 @@ samples\
 samples\**
 \videos
 *.jpg
+features.npy
+labels.npy
+face_trained.yml
