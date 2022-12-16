@@ -105,7 +105,7 @@ def class_history(request, id):
 
 def list_classes(request, id):
     if request.session['id'] and request.method == 'GET':
-        classes = Class.objects.values(
+        classes = Class.objects.filter(teacher=id).values(
             'id',
             'course',
             'semester',
@@ -123,43 +123,6 @@ def list_classes(request, id):
     return redirect('/')
 
 
-# def class_details(request, id):
-#     if request.session['id'] and request.method == 'GET':
-#         c = Class.objects.get(id=id).values(
-#             'course',
-#             'semester',
-#             'subject'
-#         )
-#         response = {'id': id, 'course': c.course, 'semester': c.semester, 'subject': c.subject}
-#         return render(request, 'class_details.html', response)
-
-#     return redirect('/')
-
-# def fetch_class_details(request, id):
-#     if request.session['id'] and request.method == 'GET':
-#         c = Class.objects.filter(id=id).values(
-#             'course',
-#             'semester',
-#             'subject'
-#         )
-
-#         classes = Student.objects.filter(course=c.course, semester=c.semester).values(
-#             'id',
-#             'course',
-#             'semester',
-#             'subject'
-#         )
-
-#         data = []
-
-#         for c in classes:
-#             data.append(c)
-
-#         return JsonResponse(data, safe=False)
-
-#     return redirect('/')
-
-
 def display(request, id):
     if request.session['id'] and request.method == 'POST':
 
@@ -175,17 +138,21 @@ def display(request, id):
         start_dd = int(start_date.split('-')[2])
 
         classes = Class.objects.filter(semester=semester, course=course, subject=subject, date__gte=datetime.date(start_yy,start_mm,start_dd)).values('attendance')
+        total_classes = len(classes)
         students = Student.objects.filter(course=course, semester=semester).values('id', 'roll', 'firstname', 'lastname')
 
         attendance = []
         
         for s in students:
-            a = {"id": s['id'], "roll": s['roll'], "firstname": s['firstname'], "lastname": s['lastname'], "classes_attended": 0}
+            a = {"id": s['id'], "roll": s['roll'], "firstname": s['firstname'], "lastname": s['lastname'], "classes_attended": 0, "percentage": 0}
             attendance.append(a)
             for c in classes:
                 if str(s['id']) in c['attendance'].split(','): 
                     attendance[attendance.index(a)]['classes_attended'] += 1
+                    
+        for a in attendance:
+            a['percentage'] = round(((a['classes_attended'] * 100) / total_classes), 2)
                 
-        return render(request, 'display.html', {"id": id, "class_details": class_details, "attendance": attendance})
+        return render(request, 'display.html', {"id": id, "class_details": class_details, "attendance": attendance,"total_classes": total_classes})
 
     return redirect('/')

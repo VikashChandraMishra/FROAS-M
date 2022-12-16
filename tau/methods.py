@@ -107,7 +107,7 @@ def record_attendance(id):
             faces_roi = gray[y:y+h, x:x+w]
             label, confidence = face_recognizer.predict(faces_roi)
             
-            if confidence <= 100:
+            if confidence <= 130:
                 labels.add(label)
 
             print(f'Label = {students[label]} with a confidence of {confidence}')

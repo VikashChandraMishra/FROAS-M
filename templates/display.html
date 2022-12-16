@@ -9,22 +9,23 @@
 <div class="container-fluid border col-9">
 
     <div class="container-fluid">
-        <h2>CLASS DETAILS</h2>
+        <h3>ATTENDANCE SINCE {{class_details.start_date}}</h3>
         <h4>SUBJECT: {{class_details.subject}}</h4>
         <h4>COURSE: {{class_details.course}}</h4>
         <h4>SEMESTER: {{class_details.semester}}</h4>
-        <h4>CLASSES ATTENDED AFTER: {{class_details.start_date}}</h4>
+        <h4>TOTAL NUMBER OF CLASSES TAKEN: {{total_classes}}</h4>
     </div>
 
     <div class="container-fluid border my-3">
         <table id="student_list">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">ROLL NUMBER</th>
-                    <th scope="col">FIRST NAME</th>
-                    <th scope="col">LAST NAME</th>
-                    <th scope="col">CLASSES ATTENDED</th>
+                    <th>ID</th>
+                    <th>ROLL NUMBER</th>
+                    <th>FIRST NAME</th>
+                    <th>LAST NAME</th>
+                    <th>CLASSES ATTENDED</th>
+                    <th>PERCENTAGE</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +45,9 @@
                     </td>
                     <td>
                         {{ a.classes_attended }}
+                    </td>
+                    <td>
+                        {{ a.percentage }}
                     </td>
                 </tr>
                 {% endfor %}
